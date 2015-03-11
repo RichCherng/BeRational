@@ -18,7 +18,7 @@ public:
    void SetNumerator(int newNum);
    void SetDenominator(int newDenom);
 
-   bool Equals(const Rational &other);
+   bool const Equals(const Rational &other);
 
    Rational add(const Rational &other);
 
