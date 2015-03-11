@@ -18,10 +18,10 @@ public:
    void SetNumerator(int newNum);
    void SetDenominator(int newDenom);
 
-   bool const Equals(const Rational &other);
+   bool Equals(const Rational &other) const;
 
    Rational add(const Rational &other);
 
-   std::string ToString();
+   std::string ToString() const;
 
 };

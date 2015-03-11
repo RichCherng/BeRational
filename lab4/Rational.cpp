@@ -20,7 +20,8 @@ void Rational::Normalize()
       mNumerator *= -1;
       mDenominator *= -1;
    }
-      
+   if (mDenominator == 0)
+      mDenominator = 1;
    int x = mNumerator,y = mDenominator,t;
    while (y != 0) {
       t = y;
@@ -32,17 +33,27 @@ void Rational::Normalize()
    mDenominator /= x;
 }
 
-bool const Rational::Equals(const Rational &other) {
-   return (double)mNumerator/(double)mDenominator == 
-      (double)other.mNumerator/(double)other.mDenominator;
+bool Rational::Equals(const Rational &other) const {
+   return mNumerator/mDenominator == 
+      other.mNumerator/other.mDenominator;
 }
 
 void Rational::SetNumerator(int newNum) {
    mNumerator = newNum;
+   Normalize();
 }
 
 void Rational::SetDenominator(int newDenom) {
    mDenominator = newDenom;
+   Normalize();
+}
+
+int Rational::GetNumerator() const {
+   return mNumerator;
+}
+
+int Rational::GetDenominator() const {
+   return mDenominator;
 }
 
 Rational Rational::add(const Rational &other) {
@@ -52,8 +63,11 @@ Rational Rational::add(const Rational &other) {
    return sum;
 }
 
-string Rational::ToString() {
-   if (mDenominator == 0)
-      return (string)mNumerator;
+string Rational::ToString() const {
+   if (mDenominator == 0 || mDenominator == 1)
+      return to_string(mNumerator);
+   else {
+      return to_string(mNumerator) + "/" + to_string(mDenominator);
+   }
 }
 
